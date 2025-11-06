@@ -45,7 +45,7 @@ $ python main.py
 🏗️  Koloni başlatılıyor...
 ✅ Alpha Colony hazır! Nüfus: 1000
 
-📋 Karar veritabanı yüklendi: 20 karar
+📋 Karar veritabanı yüklendi: 100 karar
 
 Simülasyona başlamak için Enter'a basın...
 ```
@@ -67,7 +67,7 @@ algogov-simulator/
 │   │   └── decision_manager.py# Karar yöneticisi
 │   │
 │   ├── decisions/             # Karar veritabanı
-│   │   └── decision_database.py # 20 karar (9 modül × 2-3 karar)
+│   │   └── decision_database.py # 100 karar (9 modül × 7-10 karar)
 │   │
 │   ├── simulation/            # Simülasyon motoru
 │   │   └── game_loop.py       # Oyun döngüsü
@@ -92,7 +92,7 @@ algogov-simulator/
 
 ## 🎮 Nasıl Oynanır?
 
-### Faz 1: Manuel Yönetim (Mevcut Versiyon)
+### Faz 1: Manuel Yönetim (İlk Versiyon)
 
 Siz koloni yöneticisisiniz! Her turda 9 farklı modül için kararlar alacaksınız.
 
@@ -245,7 +245,7 @@ Bu proje MIT lisansı altında açık kaynak olarak sunulmaktadır. Detaylar iç
 
 - **GitHub Issues**: Bug raporu ve özellik önerileri
 - **GitHub Discussions**: Genel tartışmalar ve sorular
-- **Email**: [your-email]
+- **Email**: [elrazi00@protonmail.com]
 
 ## 🌟 Yıldızlayın!
 
