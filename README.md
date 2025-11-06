@@ -175,14 +175,14 @@ Bu simülasyon şu soruları yanıtlamayı hedefler:
 
 ## 🗺️ Yol Haritası
 
-### ✅ v0.1 - İlk MVP (Mevcut)
+### ✅ v0.1 - İlk MVP (Gelecek)
 - [x] Temel koloni simülasyonu
 - [x] 9 modül × 2 karar = 20 karar veritabanı
 - [x] Manuel karar alma arayüzü
 - [x] 5 temel metrik takibi
 - [x] Konsol tabanlı görselleştirme
 
-### 🔄 v0.2 - Algoritma Yarışması (Gelecek)
+### 🔄 v0.2 - Algoritma Yarışması 
 - [ ] 7 farklı algoritma implementasyonu
 - [ ] Otomatik simülasyon modu
 - [ ] Algoritma performans karşılaştırması
