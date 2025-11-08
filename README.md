@@ -177,7 +177,7 @@ Bu simülasyon şu soruları yanıtlamayı hedefler:
 
 ### ✅ v0.1 - İlk MVP (Gelecek)
 - [x] Temel koloni simülasyonu
-- [x] 9 modül × 2 karar = 20 karar veritabanı
+- [x] 9 modül × 7 karar = 100 karar veritabanı
 - [x] Manuel karar alma arayüzü
 - [x] 5 temel metrik takibi
 - [x] Konsol tabanlı görselleştirme
