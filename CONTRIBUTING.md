@@ -41,7 +41,7 @@ AlgoGov topluluğu olarak, herkese açık, kapsayıcı ve saygılı bir ortam ya
 ### Şikayet Süreci
 
 Davranış kurallarının ihlal edildiğini düşünüyorsanız:
-1. Durumu proje yöneticilerine bildirin: [email@example.com]
+1. Durumu proje yöneticilerine bildirin: [elrazi00@protonmail.com]
 2. Şikayetiniz gizli tutulacak ve ciddi şekilde ele alınacaktır
 3. 48 saat içinde yanıt alacaksınız
 
@@ -963,7 +963,7 @@ python main.py --load save_game.json
 
 - 💬 [GitHub Discussions](https://github.com/[username]/algogov-simulator/discussions)
 - 🐛 [GitHub Issues](https://github.com/[username]/algogov-simulator/issues)
-- 📧 Email: [your-email]
+- 📧 Email: [elrazi00@protonmail.com]
 
 ### Faydalı Kaynaklar
 
@@ -976,4 +976,4 @@ python main.py --load save_game.json
 
 ## 🙏 Teşekkürler!
 
-AlgoGov'a katkıda bulunmayı düşündüğünüz için teşekkürler! Her katkı, büy
+AlgoGov'a katkıda bulunmayı düşündüğünüz için teşekkürler! Her katkı, büyük veya küçük, projeyi daha iyi hale getirir ve dijital demokrasi araştırmalarına değerli bir katkı sağlar.
