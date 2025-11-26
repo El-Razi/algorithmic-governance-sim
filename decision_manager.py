@@ -7,10 +7,9 @@ class DecisionManager:
     
     def __init__(self):
         self.database = DECISION_DATABASE
-        self.used_decisions: Set[str] = set()  # Kullanılan karar ID'leri
-        self.module_used_decisions: Dict[str, Set[str]] = {}  # Modül bazında takip
+        self.used_decisions: Set[str] = set()
+        self.module_used_decisions: Dict[str, Set[str]] = {}
         
-        # Her modül için kullanılan kararları ayrı takip et
         for module_name in self.database.keys():
             self.module_used_decisions[module_name] = set()
     
@@ -25,6 +24,30 @@ class DecisionManager:
                 })
         return all_decisions
     
+    def _normalize_module_name(self, module_name: str) -> Optional[str]:
+        """
+        Modül adını normalize et (emoji olmadan -> emoji ile)
+        
+        Args:
+            module_name: "Adalet" veya "⚖️ Adalet"
+        
+        Returns:
+            Veritabanındaki tam ad veya None
+        """
+        # Eğer zaten veritabanında varsa döndür
+        if module_name in self.database:
+            return module_name
+        
+        # Emoji olmadan aranıyor ise, emoji ile bulup döndür
+        for db_module_name in self.database.keys():
+            # "⚖️ Adalet" -> "Adalet"
+            clean_name = db_module_name.split(' ', 1)[-1] if ' ' in db_module_name else db_module_name
+            
+            if clean_name == module_name or clean_name in module_name:
+                return db_module_name
+        
+        return None
+    
     def get_decision_for_module(
         self, 
         module_name: str, 
@@ -35,34 +58,35 @@ class DecisionManager:
         Belirli bir modül için karar seç
         
         Args:
-            module_name: Modül adı (ör. "⚖️ Adalet")
-            phase: "setup" veya "crisis" - İlk 3 tur için setup, sonrası crisis
+            module_name: Modül adı (ör. "Adalet" veya "⚖️ Adalet")
+            phase: "setup" veya "crisis"
             avoid_repeats: Daha önce kullanılan kararları atla
         
         Returns:
             Karar dict'i veya None
         """
-        if module_name not in self.database:
-            print(f"⚠️ Uyarı: '{module_name}' modülü bulunamadı!")
+        # Modül adını normalize et
+        normalized_name = self._normalize_module_name(module_name)
+        
+        if not normalized_name:
+            print(f"⚠️ Hata: '{module_name}' modülü bulunamadı!")
             return None
         
+        module_name = normalized_name
         decisions = self.database[module_name]
         
         # Faz filtrelemesi
         if phase:
             decisions = [d for d in decisions if d.get('phase') == phase]
             
-            # Eğer o fazda karar yoksa (eski format), tümünü kullan
             if not decisions:
                 print(f"💡 '{module_name}' için {phase} fazı kararı yok, tüm havuzdan seçiliyor.")
                 decisions = self.database[module_name]
         
         if avoid_repeats:
-            # Bu modülde henüz kullanılmamış kararları filtrele
             module_used = self.module_used_decisions.get(module_name, set())
             available = [d for d in decisions if d['id'] not in module_used]
             
-            # Eğer tüm kararlar kullanıldıysa, bu modül için sıfırla
             if not available:
                 print(f"♻️  '{module_name}' havuzu tükendi, yeniden başlatılıyor...")
                 self.module_used_decisions[module_name].clear()
@@ -74,10 +98,8 @@ class DecisionManager:
             print(f"❌ '{module_name}' için kullanılabilir karar yok!")
             return None
         
-        # Rastgele bir karar seç
         decision = random.choice(available)
         
-        # Kullanıldı olarak işaretle
         self.used_decisions.add(decision['id'])
         self.module_used_decisions[module_name].add(decision['id'])
         
@@ -92,7 +114,7 @@ class DecisionManager:
         Bir tur için tüm modüllerin kararlarını al
         
         Args:
-            module_names: Modül isimleri listesi
+            module_names: Modül isimleri listesi (emoji olmadan)
             turn_number: Hangi tur (1-7)
         
         Returns:
@@ -100,7 +122,6 @@ class DecisionManager:
         """
         turn_decisions = {}
         
-        # İlk 3 tur setup fazı, sonrası crisis
         phase = "setup" if turn_number <= 3 else "crisis"
         
         print(f"🎯 Faz: {'KURULUM' if phase == 'setup' else 'KRİZ YÖNETİMİ'}")
@@ -114,7 +135,9 @@ class DecisionManager:
                 avoid_repeats=True
             )
             if decision:
-                turn_decisions[module_name] = decision
+                # Normalize edilmiş adı key olarak kullan
+                normalized = self._normalize_module_name(module_name)
+                turn_decisions[normalized] = decision
         
         return turn_decisions
     
@@ -139,23 +162,16 @@ class DecisionManager:
         return stats
     
     def reset_used_decisions(self, module_name: Optional[str] = None):
-        """
-        Kullanılan kararları sıfırla
-        
-        Args:
-            module_name: Belirli bir modül için sıfırlama (None ise tümü)
-        """
+        """Kullanılan kararları sıfırla"""
         if module_name:
-            # Sadece belirli modülü sıfırla
-            if module_name in self.module_used_decisions:
-                # Bu modülün ID'lerini global set'ten de kaldır
-                for decision_id in self.module_used_decisions[module_name]:
+            normalized = self._normalize_module_name(module_name)
+            if normalized and normalized in self.module_used_decisions:
+                for decision_id in self.module_used_decisions[normalized]:
                     self.used_decisions.discard(decision_id)
                 
-                self.module_used_decisions[module_name].clear()
-                print(f"♻️  '{module_name}' kararları sıfırlandı.")
+                self.module_used_decisions[normalized].clear()
+                print(f"♻️  '{normalized}' kararları sıfırlandı.")
         else:
-            # Tüm modülleri sıfırla
             self.used_decisions.clear()
             for module in self.module_used_decisions:
                 self.module_used_decisions[module].clear()
@@ -173,15 +189,7 @@ class DecisionManager:
         return None
     
     def get_phase_decisions(self, phase: str) -> List[Dict]:
-        """
-        Belirli bir fazdaki tüm kararları döndür
-        
-        Args:
-            phase: "setup" veya "crisis"
-        
-        Returns:
-            O fazdaki tüm kararlar
-        """
+        """Belirli bir fazdaki tüm kararları döndür"""
         phase_decisions = []
         for module_name, decisions in self.database.items():
             for decision in decisions:
@@ -193,27 +201,19 @@ class DecisionManager:
         return phase_decisions
     
     def validate_database(self) -> Dict[str, List[str]]:
-        """
-        Veritabanını doğrula, sorunları tespit et
-        
-        Returns:
-            Sorun listesi (her modül için)
-        """
+        """Veritabanını doğrula, sorunları tespit et"""
         issues = {}
         
         for module_name, decisions in self.database.items():
             module_issues = []
             
-            # Her modülde 12 karar olmalı
             if len(decisions) != 12:
                 module_issues.append(f"Karar sayısı: {len(decisions)} (12 olmalı)")
             
-            # Her kararın ID'si unique olmalı
             ids = [d['id'] for d in decisions]
             if len(ids) != len(set(ids)):
                 module_issues.append("Tekrarlayan ID var!")
             
-            # Her kararın options'ı olmalı
             for decision in decisions:
                 if 'options' not in decision:
                     module_issues.append(f"'{decision['id']}' options eksik!")
