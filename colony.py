@@ -48,10 +48,17 @@ class Colony:
         ]
     
     def _initialize_modules(self):
-        """9 yönetim modülünü başlat"""
+        """9 yönetim modülünü başlat - emoji ile!"""
         module_names = [
-            "Adalet", "Güvenlik", "Sağlık", "Eğitim", "Ekonomi",
-            "İçişleri", "Dışişleri", "Çevre", "Teknoloji"
+            "⚖️ Adalet",
+            "🛡️ Güvenlik", 
+            "🏥 Sağlık",
+            "🎓 Eğitim",
+            "💰 Ekonomi",
+            "🏛️ İçişleri",
+            "🌍 Dışişleri",
+            "🌱 Çevre",
+            "🔬 Teknoloji"
         ]
         
         for name in module_names:
