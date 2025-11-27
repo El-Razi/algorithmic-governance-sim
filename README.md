@@ -1,4 +1,4 @@
-# 🏛️ AlgoGov: Algorithmic Governance Simulator
+# 🏛️ AlgoGov
 
 ## 📌 Mevcut Diller | Available Languages | 可用语言 | Idiomas Disponibles
 - [Türkçe](#-türkçe-versiyon)
@@ -9,6 +9,11 @@
 ---
 
 # Türkçe Versiyon
+
+
+# 🏛️ AlgoGov: Algoritmik Yönetişim Simülatörü
+**Algoritmik yönetişim ve dijital demokrasiyi simüle eden açık kaynak oyun platformu**
+
 ## 🎯 Proje Hakkında
 
 AlgoGov, 1000 kişilik bir uzay kolonisinde farklı yönetim modellerini test etmek için tasarlanmış interaktif bir simülasyondur. Proje, dijital demokrasi, algoritmik karar alma ve katılımcı yönetişim konularında deneysel araştırma yapmayı hedefler.
@@ -1030,7 +1035,7 @@ Este proyecto es de código abierto bajo la licencia MIT. Consulta el archivo [L
 - **GitHub Issues**: informes de errores y solicitudes de funciones
 - **GitHub Discussions**: debates generales y preguntas
 - **Correo electrónico**: [elrazi00@protonmail.com]
-**Algoritmik yönetişim ve dijital demokrasiyi simüle eden açık kaynak oyun platformu**
+
 
 
 
