@@ -1,7 +1,7 @@
 # 🏛️ AlgoGov: Algorithmic Governance Simulator
 
 ## 📌 Mevcut Diller | Available Languages | 可用语言 | Idiomas Disponibles
-- [türkçe](#-türkçe-versiyon)
+- [Türkçe](#-türkçe-versiyon)
 - [English](#-english-version)
 - [中文](#-chinese-version)
 - [Español](#-spanish-version)
