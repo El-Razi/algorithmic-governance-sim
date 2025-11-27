@@ -8,7 +8,7 @@
 
 ---
 
-# türkçe versiyon
+# Türkçe Versiyon
 ## 🎯 Proje Hakkında
 
 AlgoGov, 1000 kişilik bir uzay kolonisinde farklı yönetim modellerini test etmek için tasarlanmış interaktif bir simülasyondur. Proje, dijital demokrasi, algoritmik karar alma ve katılımcı yönetişim konularında deneysel araştırma yapmayı hedefler.
